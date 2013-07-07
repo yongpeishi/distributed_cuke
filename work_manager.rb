@@ -10,7 +10,7 @@ get '/scenario' do
 end
 
 post '/result' do
-  results[ params[:scenario] ] = params[:result]
+  results[ params[:scenario] ] = params[:output]
 end
 
 get '/result' do
