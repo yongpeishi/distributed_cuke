@@ -1,9 +1,13 @@
 require 'rest_client'
 
-scenario = RestClient.get('http://localhost:4567/scenario')
+def get_scenario
+  RestClient.get('http://localhost:4567/scenario')
+end
 
-if scenario.empty?
-  puts "No more scenario to run. yay!"
-else
+
+while not (scenario = get_scenario).empty?
   puts `cucumber #{scenario} -r features --no-color`
 end
+
+puts "done"
+
