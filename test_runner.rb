@@ -1,5 +1,6 @@
-scenario_locations = STDIN.read.split("\n")
-scenario_output = scenario_locations.map do |scenario|
-                    `cucumber #{scenario} -r features --no-color`
-                  end
-puts scenario_output
+require 'rest_client'
+
+
+scenario = RestClient.get('http://localhost:4567/scenario')
+
+puts `cucumber #{scenario} -r features --no-color`
