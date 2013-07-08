@@ -1,21 +1,5 @@
 # ParallelCuke
 
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'parallel_cuke'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install parallel_cuke
-
 ## Usage
 
 TODO: Write usage instructions here
