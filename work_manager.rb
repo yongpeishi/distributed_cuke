@@ -4,6 +4,7 @@ scenario_locations = scenario_lines.map { |line| line.split("#")[1].strip }
 results = {}
 
 require 'sinatra'
+set :bind, '0.0.0.0'
 
 get '/scenario' do
   scenario_locations.pop
