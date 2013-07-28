@@ -1,11 +1,13 @@
 require 'rest_client'
 
 def get_scenario
-  RestClient.get('http://192.168.1.6:4567/scenario')
+  #RestClient.get('http://192.168.1.6:4567/scenario')
+  RestClient.get('http://localhost:4567/scenario')
 end
 
 def post_result scenario, output
-  RestClient.post('http://192.168.1.6:4567/result', scenario: scenario, output: output)
+  #RestClient.post('http://192.168.1.6:4567/result', scenario: scenario, output: output)
+  RestClient.post('http://localhost:4567/result', scenario: scenario, output: output)
 end
 
 while not (scenario = get_scenario).empty?
