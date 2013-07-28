@@ -1,0 +1,3 @@
+#!/bin/bash
+
+grep --line-number '^\s*Scenario' -R $1 | gsed 's/\(^.*:[0-9]\+\).*/\1/'
