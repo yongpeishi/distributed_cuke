@@ -1,13 +1,9 @@
-# ParallelCuke
+#TODO:
+1. output failing test properly
+2. check if exit with nonzero when test failed
 
-## Usage
+#Bug:
 
-TODO: Write usage instructions here
+1. Only put 2 into failedResult when all 3 are failing
+2. test_runner didnt terminate nicely
 
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
