@@ -7,14 +7,13 @@ process.stdin.setEncoding('utf8');
 
 process.stdin.on('data', function(input) {
   tasks = input.split("\n").filter(function(n){return n});
-  console.log(tasks + "\n");
   numberOfTasks = tasks.length;
 });
 
 var counter = 0;
 
 process.stdin.on('end', function() {
-  console.log("Finish reading data\n");
+  console.log("Finish reading all the task to run\n");
   process.stdin.pause();
 
   var exit_status = 0;
@@ -24,7 +23,6 @@ process.stdin.on('end', function() {
   server.setTimeout(50);
 
   server.on("request", function (req, res) {
-    console.log(req.url);
 
     switch(req.url) {
 
