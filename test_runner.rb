@@ -6,7 +6,7 @@ def get_scenario
 end
 
 def post_passed_result scenario, output
-  RestClient.post('http://localhost:1337/passed', task: scenario, output: 'passed')
+  RestClient.post('http://localhost:1337/passed', task: scenario, output: output)
 end
 
 def post_failed_result scenario, output
@@ -14,6 +14,7 @@ def post_failed_result scenario, output
 end
 
 while not (scenario = get_scenario).empty?
+  puts scenario
   output = `cucumber #{scenario} -r features --no-color`
 
   $?.to_i == 0 ? post_passed_result(scenario, output) : post_failed_result(scenario, output)

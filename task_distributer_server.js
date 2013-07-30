@@ -48,7 +48,7 @@ process.stdin.on('end', function() {
         break;
     }
 
-    killProcessWhenAllFinish(exit_status);
+    killProcessWhenAllFinish(server, exit_status);
   });
 
 
@@ -71,28 +71,37 @@ function analysePostData (request) {
 
 var failedResults = {};
 function recordResult (taskDesc, output ) {
-  if ( output != 'passed') {
-    failedResults[ taskDesc ] = output;
-  }
+  failedResults[ taskDesc ] = output;
 }
 
 function incrementCounterAndRespond(res, responseText) {
   counter++;
-  console.log(counter);
   res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end(responseText + "\n" + counter + "\n");
+  res.end(responseText);
 }
 
-function killProcessWhenAllFinish(exit_status) {
-  if( counter >= numberOfTasks*2 ) {
-    var failedTasks = Object.keys(failedResults).length
-    var passedTasks = numberOfTasks - failedTasks;
-    console.log( "Total tasks ran: " + numberOfTasks + "\n");
-    console.log( passedTasks + " Passed\n" );
-    console.log( failedTasks + " Failed\n" );
-    console.log( failedResults );
-    process.exit(exit_status);
+function killProcessWhenAllFinish(server, exit_status) {
+  if( counter > numberOfTasks*2 ) {
+    outputFailedTasks();
+    outputStatistic();
+    server.close( function () {
+      process.exit(exit_status);
+    });
   }
 }
 
+function outputFailedTasks() {
+  for( var taskDesc in failedResults) {
+    console.log( failedResults[taskDesc] + "\n" );
+  }
+}
 
+function outputStatistic() {
+  var failedTasks = Object.keys(failedResults).length
+  var passedTasks = numberOfTasks - failedTasks;
+  console.log( "*************************************" );
+  console.log( "Total tasks ran: " + numberOfTasks );
+  console.log( passedTasks + " Passed" );
+  console.log( failedTasks + " Failed" );
+  console.log( "*************************************" );
+}
