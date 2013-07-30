@@ -1,16 +1,17 @@
 require 'rest_client'
 
+SERVER_IP = ARGV.first
+
 def get_scenario
-  #RestClient.get('http://192.168.1.6:4567/scenario')
-  RestClient.get('http://localhost:1337/scenario')
+  RestClient.get("http://#{SERVER_IP}:1337/scenario")
 end
 
 def post_passed_result scenario, output
-  RestClient.post('http://localhost:1337/passed', task: scenario, output: output)
+  RestClient.post("http://#{SERVER_IP}:1337/passed", task: scenario, output: output)
 end
 
 def post_failed_result scenario, output
-  RestClient.post('http://localhost:1337/failed', task: scenario, output: output)
+  RestClient.post("http://#{SERVER_IP}:1337/failed", task: scenario, output: output)
 end
 
 while not (scenario = get_scenario).empty?
