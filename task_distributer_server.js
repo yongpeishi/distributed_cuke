@@ -64,12 +64,18 @@ function analysePostData (request) {
 
    request.on("end", function() {
      var params = qs.parse(data);
-     recordResult( params['task'] , params['output'] );
+     if( params['exit_code'] == 0 ) {
+       console.log('Passed ' + params['task'] );
+     } else {
+       console.log('Failed ' + params['task'] );
+       console.log(params['output']);
+       recordFailedResult( params['task'] , params['output'] );
+     }
    });
 }
 
 var failedResults = {};
-function recordResult (taskDesc, output ) {
+function recordFailedResult (taskDesc, output ) {
   failedResults[ taskDesc ] = output;
 }
 
