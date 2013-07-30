@@ -20,7 +20,6 @@ process.stdin.on('end', function() {
 
   var server = http.createServer()
   server.listen(1337);
-getNetworkIp();
   server.setTimeout(50);
 
   server.on("request", function (req, res) {
@@ -109,20 +108,4 @@ function outputStatistic() {
   console.log( passedTasks + " Passed" );
   console.log( failedTasks + " Failed" );
   console.log( "*************************************" );
-}
-
-function getNetworkIp() {
-  var os = require('os')
-
-  var interfaces = os.networkInterfaces();
-    console.log(interfaces);
-  ethernet = interfaces['en0']
-  for (var i=0; i<ethernet.length; i++) {
-    address = ethernet[i];
-    console.log(address);
-    if (address.family == 'IPv4' && !address.internal) {
-      console.log("hfjask " +address);
-      return address.address;
-    }
-  }
 }
