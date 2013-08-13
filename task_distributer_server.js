@@ -1,13 +1,13 @@
 var http = require('http');
 
+var input_stream = '';
 var tasks, numberOfTasks;
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 
 process.stdin.on('data', function(input) {
-  tasks = input.split("\n").filter(function(n){return n});
-  numberOfTasks = tasks.length;
+  input_stream += input;
 });
 
 var counter = 0;
@@ -15,6 +15,9 @@ var counter = 0;
 process.stdin.on('end', function() {
   console.log("Finish reading all the task to run\n");
   process.stdin.pause();
+
+  tasks = input_stream.split("\n").filter(function(n){return n});
+  numberOfTasks = tasks.length;
 
   var exit_status = 0;
 
