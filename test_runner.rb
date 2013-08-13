@@ -11,6 +11,7 @@ def post_passed_result scenario, output, exit_code
 end
 
 def post_failed_result scenario, output, exit_code
+  output = output.split("\n")[1..-4].join("\n")
   RestClient.post("http://#{SERVER_IP}:1337/failed", task: scenario, output: output, exit_code: exit_code)
 end
 
